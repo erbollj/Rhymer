@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
       routes: const [
         SearchRoute(),
         FavoritesRoute(),
-        PoemsRoute(),
+        HistoryRoute(),
         SettingsRoute(),
       ],
       builder: (context, child) {
@@ -31,7 +31,8 @@ class HomeScreen extends StatelessWidget {
               BottomNavigationBarItem(icon: Icon(Icons.search), label: "Поиск"),
               BottomNavigationBarItem(
                   icon: Icon(Icons.favorite), label: "Избранное"),
-              BottomNavigationBarItem(icon: Icon(Icons.menu), label: "Стрихи"),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.history), label: "История"),
               BottomNavigationBarItem(
                   icon: Icon(Icons.settings), label: "Настройки"),
             ],
