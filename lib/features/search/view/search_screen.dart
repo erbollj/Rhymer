@@ -13,16 +13,18 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        const SliverAppBar(
+        SliverAppBar(
           pinned: true,
           snap: true,
           floating: true,
-          title: Text("Rhymer"),
+          title: const Text("Rhymer"),
           elevation: 0,
           surfaceTintColor: Colors.transparent,
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(70),
-            child: SearchButton(),
+            preferredSize: const Size.fromHeight(70),
+            child: SearchButton(
+              onTap: () => _showSearchBottomSheet(context),
+            ),
           ),
         ),
         const SliverToBoxAdapter(
@@ -57,6 +59,19 @@ class SearchScreen extends StatelessWidget {
                   rhyme: "Рифма",
                 )),
       ],
+    );
+  }
+
+  Future<dynamic> _showSearchBottomSheet(BuildContext context) {
+    return showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      builder: (context) => const Padding(
+        padding: EdgeInsets.only(top: 60),
+        child: SearchRhymesBottomSheet(),
+      ),
     );
   }
 }
