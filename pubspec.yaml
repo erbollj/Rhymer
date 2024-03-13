@@ -36,7 +36,8 @@ dependencies:
   dio: ^5.4.1
   retrofit: ^4.1.0
   json_annotation: ^4.8.1
-  flutter_dotenv: ^5.1.0
+  flutter_bloc: ^8.1.4
+  equatable: ^2.0.5
 
 
 dev_dependencies:
@@ -47,6 +48,8 @@ dev_dependencies:
   retrofit_generator: ^8.1.0
   json_serializable: ^6.6.2
   flutter_lints: ^2.0.0
+  flutter_dotenv: ^5.1.0
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

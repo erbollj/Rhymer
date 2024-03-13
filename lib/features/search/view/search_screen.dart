@@ -1,13 +1,22 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rhymer/features/search/bloc/rhymes_list_bloc.dart';
 import 'package:rhymer/features/search/widgets/widgets.dart';
 import 'package:rhymer/ui/ui.dart';
 
 @RoutePage()
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends StatefulWidget {
   const SearchScreen({
     super.key,
   });
+
+  @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
+  final _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +32,7 @@ class SearchScreen extends StatelessWidget {
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(70),
             child: SearchButton(
+              controller: _searchController,
               onTap: () => _showSearchBottomSheet(context),
             ),
           ),
@@ -54,24 +64,49 @@ class SearchScreen extends StatelessWidget {
             height: 16,
           ),
         ),
-        SliverList.builder(
-            itemBuilder: (context, index) => const RhymeListCard(
-                  rhyme: "Рифма",
-                )),
+        BlocBuilder<RhymesListBloc, RhymesListState>(
+          bloc: BlocProvider.of<RhymesListBloc>(context),
+          builder: (context, state) {
+            if (state is RhymesListLoaded) {
+              final rhymes = state.rhymes;
+              return SliverList.builder(
+                  itemCount: rhymes.length,
+                  itemBuilder: (context, index) => RhymeListCard(
+                        rhyme: rhymes[index],
+                      ));
+            }
+            if (state is RhymesListInitial) {
+              return const SliverFillRemaining(
+                child: RhymesListInitialBanner(),
+              );
+            }
+            return const SliverFillRemaining(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          },
+        )
       ],
     );
   }
 
-  Future<dynamic> _showSearchBottomSheet(BuildContext context) {
-    return showModalBottomSheet(
+  Future<void> _showSearchBottomSheet(BuildContext context) async {
+    final bloc = BlocProvider.of<RhymesListBloc>(context);
+    final query = await showModalBottomSheet<String>(
       isScrollControlled: true,
       context: context,
       elevation: 0,
       backgroundColor: Colors.transparent,
-      builder: (context) => const Padding(
-        padding: EdgeInsets.only(top: 60),
-        child: SearchRhymesBottomSheet(),
+      builder: (context) => Padding(
+        padding: const EdgeInsets.only(top: 60),
+        child: SearchRhymesBottomSheet(
+          controller: _searchController,
+        ),
       ),
     );
+    if (query?.isNotEmpty ?? false) {
+      bloc.add(SearchRhymes(query: query!));
+    }
   }
 }

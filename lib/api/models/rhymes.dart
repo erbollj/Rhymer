@@ -10,6 +10,5 @@ class Rhymes {
 
   final List<String> words;
 
-
   Map<String, dynamic> toJson() => _$RhymesToJson(this);
 }
