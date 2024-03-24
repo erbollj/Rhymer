@@ -5,6 +5,7 @@ import 'package:rhymer/api/api.dart';
 import 'package:rhymer/repo/history/history.dart';
 
 part 'rhymes_list_event.dart';
+
 part 'rhymes_list_state.dart';
 
 class RhymesListBloc extends Bloc<RhymesListEvent, RhymesListState> {
