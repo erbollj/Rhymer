@@ -7,7 +7,7 @@ sealed class RhymesListEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class SearchRhymes extends RhymesListEvent {
+final class SearchRhymes extends RhymesListEvent {
   const SearchRhymes({required this.query});
 
   final String query;

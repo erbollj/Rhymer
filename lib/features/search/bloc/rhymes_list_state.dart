@@ -7,11 +7,11 @@ sealed class RhymesListState extends Equatable {
   List<Object> get props => [];
 }
 
-class RhymesListInitial extends RhymesListState {}
+final class RhymesListInitial extends RhymesListState {}
 
-class RhymesListLoading extends RhymesListState {}
+final class RhymesListLoading extends RhymesListState {}
 
-class RhymesListLoaded extends RhymesListState {
+final class RhymesListLoaded extends RhymesListState {
   const RhymesListLoaded(this.rhymes);
 
   final List<String> rhymes;
@@ -20,7 +20,7 @@ class RhymesListLoaded extends RhymesListState {
   List<Object> get props => super.props..add(rhymes);
 }
 
-class RhymesListFailure extends RhymesListState {
+final class RhymesListFailure extends RhymesListState {
   const RhymesListFailure(this.error);
 
   final Object error;
