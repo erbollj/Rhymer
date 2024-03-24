@@ -11,4 +11,9 @@ class Rhymes {
   final List<String> words;
 
   Map<String, dynamic> toJson() => _$RhymesToJson(this);
+
+// HistoryRhymes toLocal() => HistoryRhymes(
+//       Uuid.v4.toString(),
+//       words: words,
+//     );
 }

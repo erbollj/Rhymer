@@ -1,5 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rhymer/features/history/bloc/history_rhymes_bloc.dart';
 import 'package:rhymer/features/settings/widgets/widgets.dart';
 import 'package:rhymer/ui/ui.dart';
 
@@ -53,7 +55,7 @@ class SettingsScreen extends StatelessWidget {
           SliverToBoxAdapter(
               child: SettingsActionCard(
             title: "Очистить историю",
-            onTap: () {},
+            onTap: () => _clearHistory(context),
             iconData: Icons.delete_sweep_outlined,
             iconColor: theme.primaryColor,
           )),
@@ -66,6 +68,10 @@ class SettingsScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _clearHistory(BuildContext context) {
+    BlocProvider.of<HistoryRhymesBloc>(context).add(ClearRhymesHistory());
   }
 }
 
