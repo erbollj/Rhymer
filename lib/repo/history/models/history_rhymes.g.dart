@@ -24,20 +24,17 @@ class HistoryRhymes extends _HistoryRhymes
 
   @override
   String get id => RealmObjectBase.get<String>(this, 'id') as String;
-
   @override
   set id(String value) => RealmObjectBase.set(this, 'id', value);
 
   @override
   String get word => RealmObjectBase.get<String>(this, 'word') as String;
-
   @override
   set word(String value) => RealmObjectBase.set(this, 'word', value);
 
   @override
   RealmList<String> get words =>
       RealmObjectBase.get<String>(this, 'words') as RealmList<String>;
-
   @override
   set words(covariant RealmList<String> value) =>
       throw RealmUnsupportedSetError();
@@ -51,7 +48,6 @@ class HistoryRhymes extends _HistoryRhymes
 
   static SchemaObject get schema => _schema ??= _initSchema();
   static SchemaObject? _schema;
-
   static SchemaObject _initSchema() {
     RealmObjectBase.registerFactory(HistoryRhymes._);
     return const SchemaObject(
